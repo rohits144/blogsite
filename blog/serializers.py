@@ -1,5 +1,3 @@
-from imp import source_from_cache
-from urllib import request
 from rest_framework import serializers
 from .models import Article
 
