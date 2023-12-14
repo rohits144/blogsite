@@ -1,3 +1,4 @@
+
 import os
 
 from pathlib import Path
@@ -15,7 +16,7 @@ SECRET_KEY = 'django-insecure-lwz@ay5w-7m2onl%=5@_9y78bi5_xs6e^d2=nxjpq+ujc^h&!2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['13.215.177.27', '0.0.0.0', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = [ '0.0.0.0', 'localhost', '127.0.0.1']
 
 CORS_ORIGIN_ALLOW_ALL = True
 
@@ -105,6 +106,20 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
+USE_TZ = True
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/3.2/howto/static-files/
+
+STATIC_URL = '/static/'
+# https://docs.djangoproject.com/en/3.2/topics/i18n/
+
+LANGUAGE_CODE = 'en-us'
+
+TIME_ZONE = 'UTC'
+
+USE_I18N = True
+
 USE_L10N = True
 
 USE_TZ = True
@@ -113,7 +128,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 MEDIA_URL = '/media/'

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f2f2f2;
+            margin: 60px;
+            font-family: Arial, sans-serif;
+        }
+
+        a {
+            color: black;
+            text-decoration: underline;
+            text-transform: capitalize;
+        }
+
+        header {
+            background-color: #f8f9fa;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .navbar-brand {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+        }
+
+        main {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .article-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .article-body {
+            font-size: 18px;
+            line-height: 1.8;
+            text-align: left;
+            margin-bottom: 30px;
+        }
+
+        .article-content {
+            font-size: 16px;
+            line-height: 1.4;
+            margin-bottom: 20px;
+        }
+
+        footer {
+            background-color: #f8f9fa;
+            padding: 10px;
+        }
+
+        footer p {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="mb-4">
+        <h2 class="text-center font-weight-bold">My Articles</h2>
+    </header>
+
+    <main class="container">
+        {% block content %}
+        <!-- Content goes here -->
+        {% endblock %}
+    </main>
+
+    <footer class="mt-4">
+        <div class="container text-center">
+            <p>&copy; 2022 My Blog</p>
+        </div>
+    </footer>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
