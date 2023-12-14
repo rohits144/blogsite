@@ -1,4 +1,3 @@
-from urllib import request
 from django_extensions.db.models import TimeStampedModel
 from django.db import models
 
