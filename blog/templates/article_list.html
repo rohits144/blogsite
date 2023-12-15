@@ -6,21 +6,20 @@
 <div class="article">
     <div class="article-content">
         <ul>
-            <li>
-                <a href="{% url 'article-detail' pk=article.id %}">
-                    <div class="line-item">
-                        <div class="image-container">
-                            <img src="{{ article.image.url }}" alt="{{ article.title }}" style="max-width: 100%; max-height: 200px; border-radius: 10px;">
-                        </div>
-                        <div class="title-container">
-                            <h2>{{ article.title }}</h2>
-                            <p>{{ article.get_short_description }}</p>
-                        <p>Publish Date: {{ article.created }}</p>
-                        </div>
-                        
+            <a href="{% url 'article-detail' pk=article.id %}">
+                <div class="line-item">
+                    <div class="image-container">
+                        <img src="{{ article.image.url }} " alt="Article image"
+                            style="max-width: 100%; max-height: 200px; border-radius: 10px;">
                     </div>
-                </a>
-            </li>
+                    <div class="title-container">
+                        <h2>{{ article.title }}</h2>
+                        <p>{{ article.get_short_description }}</p>
+                        <p>Publish Date: {{ article.created }}</p>
+                    </div>
+
+                </div>
+            </a>
         </ul>
     </div>
 </div>
