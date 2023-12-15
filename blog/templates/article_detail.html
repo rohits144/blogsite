@@ -3,10 +3,10 @@
 
 {% block content %}
     <div class="article-detail">
-        <div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
-            <img src="{{ article.image.url }}" alt="{{ article.title }}" style="width: 50vw;">
+        <div style="display: flex; justify-content: center; align-items: center; height: 80vh;">
+            <img src="{{ article.image.url }}" alt="{{ article.title }}" style="width: 40vw;">
         </div>
-        <h1 class="article-title">{{ article.title }}</h1>
+        <h1 class="article-title" style="text-decoration: underline;">{{ article.title }}</h1>
         <p class="article-body">{{ article.body }}</p>
         <p>Published on: {{ article.created }}</p>
     </div>
