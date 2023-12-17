@@ -6,8 +6,11 @@ from django.conf.urls.static import static
 from blogsite import settings
 
 from blog import urls as blog_urls
+from tasks import urls as tasks_urls  # Import the tasks URLs
+
 
 urlpatterns = [
+    path('tasks/', include(tasks_urls)),
     path('admin/', admin.site.urls),
     path('', include(blog_urls), name='articles'),
 ]
