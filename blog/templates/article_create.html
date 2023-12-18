@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}  <!-- Add this line to load crispy forms tags -->
+
+{% block content %}
+<h1>Create Article</h1>
+
+<div>
+    {% if message %}
+    <p style="color: {% if message_type == 'success' %}green{% else %}red{% endif %}">{{ message }}</p>
+    {% endif %}
+</div>
+<form method="POST" class="form" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+        {{ form|crispy }}  <!-- Use crispy filter to render the form with crispy styles -->
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+{% endblock %}

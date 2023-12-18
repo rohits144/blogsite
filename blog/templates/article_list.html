@@ -4,7 +4,7 @@
 
 {% for article in articles %}
 <div class="article">
-    <div class="article-content">
+    <div class="article-content" style="padding: 10px;"></div>
         <ul>
             <a href="{% url 'article-detail' pk=article.id %}">
                 <div class="line-item">
