@@ -17,7 +17,7 @@ class ArticleListView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         category = self.kwargs.get('category', "DEFAULT")
-        articles = Article.objects.filter(category=category)
+        articles = Article.objects.filter(category=category).order_by('-created')
         context['category'] = category
         context['articles'] = articles
         return context
