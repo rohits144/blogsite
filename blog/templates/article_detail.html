@@ -8,6 +8,7 @@
     }
 
     .article {
+        position:relative;
         width: 100%;
         background-color: #f0f0f0;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -20,12 +21,27 @@
         max-width: 100%; /* restrict max width to 60% of the screen */
         height: auto; /* maintain aspect ratio */
         border-radius: 10px; /* round the edges */
+        margin-bottom: 20px;
     }
     .image-container {
         display: flex; /* use Flexbox */
         justify-content: center; /* center horizontally */
         align-items: center; /* center vertically */
     }
+
+    .article-title {
+        border-bottom: 1px solid #ddd; /* thin, light line */
+        padding-bottom: 10px; /* space between title and line */
+        margin-bottom: 20px; /* space below line */
+    }
+
+    .published-date {
+        font-size: 0.8em; /* small font size */
+        position: absolute; /* position relative to the article div */
+        bottom: 10px; /* position at the bottom right corner */
+        right: 10px;
+    }
+
 </style>
 
 <div class="container">
@@ -34,8 +50,11 @@
             <img src="{{ article.get_image_url }}" alt="{{ article.title }}" class="article-image">
         </div>
         <div class="article-content">
-            <h2>{{ article.title }}</h2>
+            <h2 class="article-title">{{ article.title }}</h2>
             {{ article.body|safe }}
+        </div>
+        <div class="published-date">
+            Published on: {{ article.created|date:"F j, Y" }}
         </div>
     </div>
 </div>

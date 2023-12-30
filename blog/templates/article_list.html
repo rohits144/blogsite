@@ -17,6 +17,7 @@
     }
 
     .article {
+        position: relative;
         width: 100%;
         background-color: #d6dbdc;
         /* light grey */
@@ -39,6 +40,13 @@
     .article-image {
         max-width: 100%;
         height: auto;
+    }
+
+    .published-date {
+        font-size: 0.8em; /* small font size */
+        position: absolute; /* position relative to the article div */
+        bottom: 10px; /* position at the bottom right corner */
+        right: 10px;
     }
 
     @media (min-width: 600px) {
@@ -65,6 +73,7 @@
         .article:nth-child(3n) {
             margin-right: 0;
         }
+
     }
 </style>
 <div class="container">
@@ -77,6 +86,9 @@
             <div class="article-content">
                 <img src="{{ article.image.url }}" alt="{{ article.title }}" class="article-image">
                 <p>{{ article.short_description }}</p>
+            </div>
+            <div class="published-date">
+                Published on: {{ article.created|date:"F j, Y" }}
             </div>
         </div>
     </a>
