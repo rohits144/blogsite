@@ -1,75 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <style>
-        body {
-            background-color: #dce0dcf3;
-            font-family: Arial, sans-serif;
-        }
 
-        a {
-            color: black;
-            text-transform: capitalize;
-        }
 
-        header {
-            padding: 10px;
-            text-align: center;
-        }
-
-        .navbar-brand {
-            font-size: 24px;
-            font-weight: bold;
-            color: #333;
-            text-align: center;
-        }
-
-        .navbar-nav {
-            margin-top: 10px;
-        }
-
-        .navbar-nav li {
-            display: inline-block;
-            margin-right: 10px;
-        }
-
-        .navbar-nav li a {
-            color: #333;
-            text-decoration: none;
-            font-size: 18px;
-        }
-
-        .article-title {
-            font-size: 28px;
-            font-weight: bold;
-            color: #333;
-            text-align: left;
-            margin-bottom: 20px;
-        }
-
-        .article-body {
-            font-size: 18px;
-            line-height: 1.8;
-            text-align: left;
-            margin-bottom: 30px;
-        }
-
-        .article-content {
-            font-size: 16px;
-            line-height: 1.4;
-            margin-bottom: 20px;
-        }
-
-        footer {
-            padding: 10px;
-        }
-
-        footer p {
-            margin-bottom: 0;
-        }
     </style>
 </head>
 
@@ -97,20 +35,22 @@
         </nav>
     </header>
 
-    <main class="container">
-        {% block content %}
-        <!-- Content goes here -->
-        {% endblock %}
-    </main>
-
-<footer class="mt-4">
-    <div class="container text-center">
-        <p>&copy; 2022 My Blog</p>
+    <div class="container">
+        <div class="row">
+            {% block content %}
+            <!-- Content goes here -->
+            {% endblock %}
+        </div>
     </div>
-</footer>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
+    <footer class="mt-4">
+        <div class="container text-center">
+            <p>&copy; 2022 My Blog</p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

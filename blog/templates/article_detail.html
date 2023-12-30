@@ -2,18 +2,39 @@
 
 {% block content %}
 
-<div class="article"
-    style="background-color: lightgrey; padding: 10px; border-radius: 5px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); width: 100%; margin-left: 20px;">
+<style>
+    body {
+        background: #add8e6;
+    }
 
-    <div class="image-container" style="padding: 10px;">
-        <img src="{{ article.get_image_url }}" alt="{{ article.title }}"
-            style="width: 50%; height: 50%; border-radius: 10px;" >
-    </div>
-    <div class="title-container" style="padding: 10px;">
-        <div class="item-container" style="padding: 10px;">
-            <h2>{{ article.title }}</h2>
+    .article {
+        width: 100%;
+        background-color: #f0f0f0;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        padding: 30px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+
+    .article-image {
+        max-width: 100%; /* restrict max width to 60% of the screen */
+        height: auto; /* maintain aspect ratio */
+        border-radius: 10px; /* round the edges */
+    }
+    .image-container {
+        display: flex; /* use Flexbox */
+        justify-content: center; /* center horizontally */
+        align-items: center; /* center vertically */
+    }
+</style>
+
+<div class="container">
+    <div class="article">
+        <div class="image-container">
+            <img src="{{ article.get_image_url }}" alt="{{ article.title }}" class="article-image">
         </div>
-        <div class="item-container" style="padding: 10px;">
+        <div class="article-content">
+            <h2>{{ article.title }}</h2>
             {{ article.body|safe }}
         </div>
     </div>

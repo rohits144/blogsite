@@ -1,39 +1,89 @@
 {% extends 'base.html' %}
 {% load static %}
+
 {% block content %}
+<style>
+    body {
+        background: linear-gradient(to right, #c7ebfd, #8aa0a7);
+    }
+    nav a {
+        color: #000; /* dark font */
+        font-weight: bold; /* bold text */
+    }
+    .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
 
-{% for article in articles %}
-<div class="article"
-    style="background-color: lightgrey; padding: 10px; border-radius: 5px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); margin-top: 20px;">
-    <div class="article-content">
-        <ul>
-            <a href="{% url 'article-detail' pk=article.id %}">
-                <div class="line-item" style="margin-top: 10px;">
-                    <div class="row">
-                        <div class="image-container">
-                            <img src="{{ article.get_image_url }}" alt="{{ article.title }}"
-                                style="width: 200px; height: 200px; border-radius: 10px;">
-                        </div>
-                        <div class="article-content" style="margin-left: 30px;"></div>
-                        <div class="item-container">
-                            <h2>{{ article.title }}</h2>
-                            <div class="item-container">
-                                <p>{{ article.get_short_description }}</p>
-                            </div>
-                            <br>
-                            <div class="item-container">
-                                Publish Date: {{ article.created }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </ul>
+    .article {
+        width: 100%;
+        background-color: #d6dbdc;
+        /* light grey */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        /* horizontal offset, vertical offset, blur radius, color */
+        padding: 30px;
+        border-radius: 5px;
+        margin-bottom: 20px; /* space between articles */
+    }
+
+    .article-title {
+        font-size: 1.5em;
+        overflow-wrap: break-word; /* break words that are too long to fit */
+    }
+
+    .article-content {
+        font-size: 1em;
+    }
+
+    .article-image {
+        max-width: 100%;
+        height: auto;
+    }
+
+    @media (min-width: 600px) {
+        .article {
+            width: 60%;
+            float: left;
+            margin-right: 2%;
+        }
+
+        .article:nth-child(2n) {
+            margin-right: 0;
+        }
+    }
+
+    @media (min-width: 900px) {
+        .article {
+            width: 31%;
+        }
+
+        .article:nth-child(2n) {
+            margin-right: 4%;
+        }
+
+        .article:nth-child(3n) {
+            margin-right: 0;
+        }
+    }
+</style>
+<div class="container">
+    {% for article in articles %}
+    <a href="{% url 'article-detail' article.id %}" style="text-decoration: none; color: inherit;">
+        <div class="article">
+            <div class="article-title">
+                <h2>{{ article.title }}</h2>
+            </div>
+            <div class="article-content">
+                <img src="{{ article.image.url }}" alt="{{ article.title }}" class="article-image">
+                <p>{{ article.short_description }}</p>
+            </div>
+        </div>
+    </a>
+    {% empty %}
+    <div class="no-items">
+        No items to display.
     </div>
+    {% endfor %}
 </div>
-
-{% empty %}
-<p>No articles found.</p>
-{% endfor %}
-
 {% endblock %}
