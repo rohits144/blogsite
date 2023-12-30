@@ -11,6 +11,12 @@ class Article(TimeStampedModel):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
     author = models.EmailField(null=True, blank=True, max_length=100) 
+    CATEGORY_CHOICES = [
+        ('DEFAULT', 'Default'),
+        ('FEEDS', 'Feeds'),
+    ]
+
+    category = models.CharField(null=False, blank=False, max_length=100, choices=CATEGORY_CHOICES, default='DEFAULT')
 
     @property
     def get_created(self):

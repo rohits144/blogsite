@@ -8,14 +8,17 @@ from .forms import ArticleForm
 from .models import Article
 from .serializers import ArticleSerializer
 from django.contrib import messages
-
+from django.views.generic import TemplateView
+from .models import Article
 
 class ArticleListView(TemplateView):
     template_name = 'article_list.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        articles = Article.objects.all().order_by("-created")
+        category = self.kwargs.get('category', "DEFAULT")
+        articles = Article.objects.filter(category=category)
+        context['category'] = category
         context['articles'] = articles
         return context
 
@@ -24,7 +27,6 @@ class ArticleDetailView(DetailView):
     model = Article
     template_name = 'article_detail.html'
     context_object_name = 'article'
-
 
 class ArticleCreateView(generics.CreateAPIView):
     queryset = Article.objects.all()

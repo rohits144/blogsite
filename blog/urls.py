@@ -8,8 +8,8 @@ from blogsite import settings
 from .views import ArticleCreateView
 
 urlpatterns = [
-    path('admin/', admin.site.urls, name='admin'),
-    path('', ArticleListView.as_view(), name='article-list'),
+    path('', ArticleListView.as_view(), name='article-list', kwargs={'category': 'DEFAULT'}),
+    path('feeds/', ArticleListView.as_view(), name='feed-article-list', kwargs={'category': 'FEEDS'}),
     path('<int:pk>', ArticleDetailView.as_view(), name='article-detail'), 
     path('contact', TemplateView.as_view(template_name='contact.html'), name='contact'),
     path('create', ArticleCreateView.as_view(), name='article-create'),
