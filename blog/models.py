@@ -7,7 +7,7 @@ from django.core.exceptions import ValidationError
 class Article(TimeStampedModel):
     title = models.CharField(null=False, blank=False, max_length=100)
     body = models.TextField()
-    image = models.ImageField(null=True, blank=True, default='Cat03.jpg')
+    image = models.ImageField(upload_to='media/',null=True, blank=True, default='Cat03.jpg')
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
     author = models.EmailField(null=True, blank=True, max_length=100) 
@@ -40,6 +40,13 @@ class Article(TimeStampedModel):
     @property
     def get_short_description(self):
         return self.body[:100] + "..."
+    
+    @property
+    def get_image_url(self):
+        if self.image and hasattr(self.image, 'url'):
+            return self.image.url
+        else:
+            return 'media/Cat03.jpg'
 
 
 class Comment(TimeStampedModel):
