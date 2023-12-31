@@ -1,16 +1,36 @@
 {% extends 'base.html' %}
 
-{% load static %}
 {% block content %}
-    <main style="text-align: center; font-family: Arial, sans-serif;">
-        <h1>Contact Details</h1>
-        <p>Welcome to our contact page.</p>
-        <div style="padding-bottom: 20px;">
-            <img src="{{ 'media/Cat03.jpg' }}" alt="Website Creator" style="width: 30%; display: block; margin: 0 auto;"/>
-        </div>
-        <section>
-            <h2>Email</h2>
-            <p>inforohitindian@gmail.com</p>
+<style>
+    body {
+        background: #add8e6;
+        justify-content: center; /* center horizontally */
+        align-items: center; /* center vertically */
+    }
+
+    .article {
+        position:relative;
+        width: 100%;
+        background-color: #f0f0f0;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        padding: 30px;
+    }
+
+    .article-title {
+        padding-bottom: 10px; /* space between title and line */
+        text-align: center; /* center align the text */
+        margin-bottom: 20px; /* space below line */
+        margin: 0 auto; /* center justify */
+    }
+</style>
+    <div class="article">
+        <h1 class="article-title">Contact Details</h1>
+        <p class="article-title">Welcome to our contact page.</p>
+        <section class="article-title">
+            <h2 class="subtitle">Email</h2>
+            <p class="email">inforohitindian@gmail.com</p>
         </section>
-    
+    </div>
 {% endblock %}
+
+    
