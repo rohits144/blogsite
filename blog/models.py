@@ -2,6 +2,7 @@ from django_extensions.db.models import TimeStampedModel
 from django.db import models
 from django.core.validators import URLValidator
 from django.core.exceptions import ValidationError
+from django.db import connection
 
 
 class Article(TimeStampedModel):
@@ -48,6 +49,8 @@ class Article(TimeStampedModel):
         else:
             return 'media/Cat03.jpg'
 
+    def get_all_comments(self):
+        return Comment.objects.filter(article=self.id)
 
 class Comment(TimeStampedModel):
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
@@ -74,6 +77,14 @@ class Comment(TimeStampedModel):
     def save(self, *args, **kwargs):
         if self.body is None or self.body == "":
             raise ValidationError("Comment body cannot be null.")
+        
+        # Validate against SQL injection
+        #with connection.cursor() as cursor:
+        #    cursor.execute("SELECT 1 FROM Comment WHERE body = %s", [self.body])
+        #    result = cursor.fetchone()
+        #    if result:
+        #        raise ValidationError("Comment contains invalid characters.")
+        
         super().save(*args, **kwargs)
 
         

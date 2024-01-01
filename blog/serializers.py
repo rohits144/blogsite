@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Article
+from .models import Article, Comment
 
 class ArticleSerializer(serializers.ModelSerializer):
     author = serializers.CharField(source='get_author')
@@ -25,3 +25,7 @@ class ArticleSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Title must be at least 5 characters long.")
         return value
 
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = ['id', 'article', 'body', 'created_at', 'updated_at']

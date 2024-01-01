@@ -1,14 +1,11 @@
 {% extends 'base.html' %}
-
+{% load crispy_forms_tags %}
 {% block content %}
 
 <style>
-    body {
-        background: #add8e6;
-    }
 
     .article {
-        position:relative;
+        position: relative;
         width: 100%;
         background-color: #f0f0f0;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -18,30 +15,82 @@
     }
 
     .article-image {
-        max-width: 100%; /* restrict max width to 60% of the screen */
-        height: auto; /* maintain aspect ratio */
-        border-radius: 10px; /* round the edges */
+        max-width: 100%;
+        /* restrict max width to 60% of the screen */
+        height: auto;
+        /* maintain aspect ratio */
+        border-radius: 10px;
+        /* round the edges */
         margin-bottom: 20px;
     }
+
     .image-container {
-        display: flex; /* use Flexbox */
-        justify-content: center; /* center horizontally */
-        align-items: center; /* center vertically */
+        display: flex;
+        /* use Flexbox */
+        justify-content: center;
+        /* center horizontally */
+        align-items: center;
+        /* center vertically */
     }
 
     .article-title {
-        border-bottom: 1px solid #ddd; /* thin, light line */
-        padding-bottom: 10px; /* space between title and line */
-        margin-bottom: 20px; /* space below line */
+        border-bottom: 1px solid #ddd;
+        /* thin, light line */
+        padding-bottom: 10px;
+        /* space between title and line */
+        margin-bottom: 20px;
+        /* space below line */
     }
 
     .published-date {
-        font-size: 0.8em; /* small font size */
-        position: absolute; /* position relative to the article div */
-        bottom: 10px; /* position at the bottom right corner */
+        font-size: 0.8em;
+        /* small font size */
+        position: absolute;
+        /* position relative to the article div */
+        bottom: 10px;
+        /* position at the bottom right corner */
         right: 10px;
     }
 
+    .comment {
+        margin-top: 20px;
+        padding-top: 20px;
+    }
+
+    .table{
+        margin-top: 10px;
+        background-color: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+        border-bottom: none;
+        border: none;
+    }
+
+    .form {
+        margin-left: 0;
+    }
+
+    /* Media queries for mobile screens */
+    @media only screen and (max-width: 600px) {
+        .article {
+            padding: 20px;
+        }
+
+        .article-image {
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .article-title {
+            margin-bottom: 10px;
+        }
+
+        .published-date {
+            font-size: 0.7em;
+            bottom: 5px;
+            right: 5px;
+        }
+    }
 </style>
 
 <div class="container">
@@ -57,6 +106,42 @@
             Published on: {{ article.created|date:"F j, Y" }}
         </div>
     </div>
+    <hr style="border-top: 1px solid black; margin-top: 10px; margin-bottom: 30px; width: 30%;">
+    <div>
+        <h3>Add a comment</h3>
+        <form method="post" class="form" enctype="multipart/form-data" action="{% url 'create-comment' %}">
+            {% csrf_token %}
+            <div  class="form">
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ form|crispy }}
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </div>
+                </div>
+            </div>
+            
+        </form>
+    </div>
+    {% if comments %}
+    <div class="comment">
+        <h3>Comments</h3>
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">User</th>
+                <th scope="col">Comment</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for comment in comments %}
+            <tr>
+                <td>{{ comment.username }}</td>
+                <td>{{ comment.body }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
-
+{% endif %}
 {% endblock %}
