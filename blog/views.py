@@ -72,6 +72,4 @@ class CommentCreateView(generics.CreateAPIView):
             comment.save()
             messages.success(request, 'Comment created successfully.')
             return HttpResponseRedirect(reverse('article-detail', kwargs={'pk': article_id}))
-        else:
-            return HttpResponseRedirect(reverse('article-detail', kwargs={'pk': article_id, 'error_message': 'Invalid form data'}))
 
