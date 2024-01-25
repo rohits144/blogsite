@@ -60,8 +60,15 @@
     }
 
     @media (min-width: 900px) {
+        .article-image {
+            display: block;
+            width: 70%; /* make the image width relative to the div width */
+            height: auto;
+            margin: 0 auto; /* center the image horizontally */
+       }
+        
         .article {
-            width: 31%;
+            width: 100%;
         }
 
         .article:nth-child(2n) {
