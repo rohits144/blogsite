@@ -41,10 +41,10 @@
     .article_name_list {
         background-color: white;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        padding: 20px;
+        padding: 15px;
         border-radius: 5px;
-        margin-bottom: 20px;
-        /* space between articles */
+        margin-bottom: 10px;
+        font: 1em sans-serif;
     }
 
     .article-title {
@@ -114,7 +114,7 @@
         {% for article in articles %}
         <a href="{% url 'article-detail' article.id %}" style="text-decoration: none; color: inherit;">
             <div class="article_name_list">
-                <h2>{{ article.title }}</h2>
+                {{ article.title }}
             </div>
         </a>
         {% empty %}
