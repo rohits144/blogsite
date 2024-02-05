@@ -3,18 +3,27 @@
 
 {% block content %}
 <style>
-
     nav a {
-        color: #000; /* dark font */
-        font-weight: bold; /* bold text */
+        color: #000;
+        /* dark font */
+        font-weight: bold;
+        /* bold text */
     }
+
     .container {
-        width: 80%; /* Set width to 100% of its parent container */
-        max-width: 65%; /* Limit maximum width to 800px */
-        margin: 1% auto;
-        padding: 20px; /* Add some padding for spacing */
-        box-sizing: border-box; /* Include padding and border in total width */
-  }
+        display: flex;
+    }
+
+
+    .left {
+        flex: 0 0 90%;
+        padding: 10px;
+    }
+
+    .right {
+        flex: 0 0 10%;
+        padding: 20px;
+    }
 
     .article {
         position: relative;
@@ -23,14 +32,25 @@
         /* light grey */
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         /* horizontal offset, vertical offset, blur radius, color */
-        padding: 30px;
+        padding: 20px;
         border-radius: 5px;
-        margin-bottom: 20px; /* space between articles */
+        margin-bottom: 20px;
+        /* space between articles */
+    }
+
+    .article_name_list {
+        background-color: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        /* space between articles */
     }
 
     .article-title {
         font-size: 1.5em;
-        overflow-wrap: break-word; /* break words that are too long to fit */
+        overflow-wrap: break-word;
+        /* break words that are too long to fit */
     }
 
     .article-content {
@@ -43,33 +63,66 @@
     }
 
     .published-date {
-        font-size: 0.8em; /* small font size */
-        position: absolute; /* position relative to the article div */
-        bottom: 10px; /* position at the bottom right corner */
+        font-size: 0.8em;
+        /* small font size */
+        position: absolute;
+        /* position relative to the article div */
+        bottom: 10px;
+        /* position at the bottom right corner */
         right: 10px;
     }
+    @media screen and (max-width: 600px) {
+    .container {
+      flex-direction: column; /* Stack divs vertically on small screens */
+    }
 
+    .left, .right {
+      flex: none; /* Remove flex to allow content to dictate width */
+      width: 100%; /* Make divs take up full width */
+    }
+  }
 </style>
 <div class="container">
-    {% for article in articles %}
-    <a href="{% url 'article-detail' article.id %}" style="text-decoration: none; color: inherit;">
-        <div class="article">
-            <div class="article-title">
+    <div class="left">
+        {% for article in articles %}
+        <a href="{% url 'article-detail' article.id %}" style="text-decoration: none; color: inherit;">
+            <div class="article">
+                <div class="article-title">
+                    <h2>{{ article.title }}</h2>
+                </div>
+                <div class="article-content">
+                    <img src="{{ article.image.url }}" alt="{{ article.title }}" class="article-image">
+                    <p>{{ article.short_description }}</p>
+                </div>
+                <div class="published-date">
+                    Published on: {{ article.created|date:"F j, Y" }}
+                </div>
+            </div>
+        </a>
+        {% empty %}
+        <div class="no-items">
+            No items to display.
+        </div>
+        {% endfor %}
+    </div>
+    <div class="right">
+        <p>
+            <h3>
+                Older Posts:
+            </h3>
+        </p>
+        {% for article in articles %}
+        <a href="{% url 'article-detail' article.id %}" style="text-decoration: none; color: inherit;">
+            <div class="article_name_list">
                 <h2>{{ article.title }}</h2>
             </div>
-            <div class="article-content">
-                <img src="{{ article.image.url }}" alt="{{ article.title }}" class="article-image">
-                <p>{{ article.short_description }}</p>
-            </div>
-            <div class="published-date">
-                Published on: {{ article.created|date:"F j, Y" }}
-            </div>
+        </a>
+        {% empty %}
+        <div class="no-items">
+            No items to display.
         </div>
-    </a>
-    {% empty %}
-    <div class="no-items">
-        No items to display.
+        {% endfor %}
+
     </div>
-    {% endfor %}
 </div>
 {% endblock %}
