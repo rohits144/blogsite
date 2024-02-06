@@ -17,7 +17,7 @@ class ArticleListView(ListView):
     context_object_name = 'articles'
     template_name = 'article_list.html'
     paginate_by = 5
-    queryset = Article.objects.all()
+    queryset = Article.objects.filter().order_by('-created')
 
 
 class ArticleDetailView(DetailView, generics.CreateAPIView):
