@@ -2,7 +2,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
-from django.views.generic import TemplateView, DetailView
+from django.views.generic import TemplateView, DetailView, ListView
 from rest_framework import generics
 
 from .forms import ArticleForm, CommentForm
@@ -12,16 +12,12 @@ from django.contrib import messages
 from django.views.generic import TemplateView
 from .models import Article
 
-class ArticleListView(TemplateView):
+class ArticleListView(ListView):
+    model = Article
+    context_object_name = 'articles'
     template_name = 'article_list.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        category = self.kwargs.get('category', "DEFAULT")
-        articles = Article.objects.filter(category=category).order_by('-created')
-        context['category'] = category
-        context['articles'] = articles
-        return context
+    paginate_by = 5
+    queryset = Article.objects.all()
 
 
 class ArticleDetailView(DetailView, generics.CreateAPIView):
