@@ -1,4 +1,5 @@
 
+from typing import Any
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
@@ -18,6 +19,11 @@ class ArticleListView(ListView):
     template_name = 'article_list.html'
     paginate_by = 5
     queryset = Article.objects.filter().order_by('-created')
+
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context['all_articles'] = Article.objects.filter().order_by('created')[:10]
+        return context
 
 
 class ArticleDetailView(DetailView, generics.CreateAPIView):
