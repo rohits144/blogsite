@@ -38,6 +38,10 @@ class ArticleDetailView(DetailView, generics.CreateAPIView):
         article = Article.objects.get(pk=self.kwargs['pk'])
         context['comments'] = Article.get_all_comments(article)
         return context
+    
+
+class InstaFeed(TemplateView):
+    template_name = 'insta_feeds.html'
 
 class ArticleCreateView(generics.CreateAPIView):
     queryset = Article.objects.all()
