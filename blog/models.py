@@ -9,6 +9,7 @@ class Article(TimeStampedModel):
     title = models.CharField(null=False, blank=False, max_length=100)
     body = models.TextField()
     image = models.ImageField(upload_to='media/',null=True, blank=True, default='Cat03.jpg')
+    video = models.FileField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
     author = models.EmailField(null=True, blank=True, max_length=100) 
@@ -48,6 +49,13 @@ class Article(TimeStampedModel):
             return self.image.url
         else:
             return 'media/Cat03.jpg'
+        
+    @property
+    def get_video_url(self):
+        if self.video and hasattr(self.video, 'url'):
+            return self.video.url
+        else:
+            return None
 
     def get_all_comments(self):
         return Comment.objects.filter(article=self.id)
