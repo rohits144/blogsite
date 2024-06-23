@@ -3,7 +3,6 @@
 {% block content %}
 
 <style>
-
     .article {
         position: relative;
         width: 100%;
@@ -24,7 +23,7 @@
         margin-bottom: 20px;
     }
 
-    .video  {
+    .video {
         position: relative;
         width: 100%;
         padding: 30px;
@@ -66,7 +65,7 @@
         padding-top: 20px;
     }
 
-    .table{
+    .table {
         margin-top: 10px;
         background-color: white;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -103,6 +102,14 @@
         <div class="image-container">
             <img src="{{ article.get_image_url }}" alt="{{ article.title }}" class="article-image">
         </div>
+        {% if article.video %}
+        <div>
+            <video class="video" controls>
+                <source src="{{ article.get_video_url }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        {% endif %}
         <div class="article-content">
             <h2 class="article-title">{{ article.title }}</h2>
             {{ article.body|safe }}
@@ -117,7 +124,7 @@
         <form method="post" class="form" enctype="multipart/form-data" action="{% url 'create-comment' %}">
             {% csrf_token %}
             <div class="form-group">
-                {{ form|crispy }} 
+                {{ form|crispy }}
                 <input type="hidden" name="article_id" value="{{ article.id }}">
             </div>
             <button type="submit" class="btn btn-primary">Create</button>
@@ -126,23 +133,23 @@
     {% if comments %}
     <div class="comment">
         <h3>Comments</h3>
-    
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">User</th>
-                <th scope="col">Comment</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for comment in comments %}
-            <tr>
-                <td>{{ comment.username }}</td>
-                <td>{{ comment.body }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
-{% endif %}
-{% endblock %}
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">User</th>
+                    <th scope="col">Comment</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for comment in comments %}
+                <tr>
+                    <td>{{ comment.username }}</td>
+                    <td>{{ comment.body }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+    {% endblock %}
