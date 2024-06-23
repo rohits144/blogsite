@@ -1,17 +1,15 @@
-
 from typing import Any
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
-from django.views.generic import TemplateView, DetailView, ListView
+from django.views.generic import DetailView, ListView, TemplateView
 from rest_framework import generics
 
 from .forms import ArticleForm, CommentForm
 from .models import Article, Comment
 from .serializers import ArticleSerializer, CommentSerializer
 from django.contrib import messages
-from django.views.generic import TemplateView
-from .models import Article
+
 
 class ArticleListView(ListView):
     model = Article
@@ -38,10 +36,11 @@ class ArticleDetailView(DetailView, generics.CreateAPIView):
         article = Article.objects.get(pk=self.kwargs['pk'])
         context['comments'] = Article.get_all_comments(article)
         return context
-    
+
 
 class InstaFeed(TemplateView):
     template_name = 'insta_feeds.html'
+
 
 class ArticleCreateView(generics.CreateAPIView):
     queryset = Article.objects.all()
@@ -79,3 +78,7 @@ class CommentCreateView(generics.CreateAPIView):
             messages.success(request, 'Comment created successfully.')
             return HttpResponseRedirect(reverse('article-detail', kwargs={'pk': article_id}))
 
+
+class ArticleListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Article.objects.all()
+    serializer_class = ArticleSerializer
